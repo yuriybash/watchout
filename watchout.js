@@ -37,17 +37,6 @@ var drag = d3.behavior.drag()
           .on('dragend', function(){})
 
 
-// var drag = d3.behavior.drag()
-//   .on("drag", dragmove)
-
-// var dragmove = function(d){
-//   var x = d3.event.x;
-//   var y = d3.event.y;
-//   d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
-//   //this.x = x;
-//   //this.y = y;
-// }
-
 
 
 //INITIALIZE BOARD (this is a function)
@@ -61,7 +50,7 @@ var drag = d3.behavior.drag()
 
 
 
-
+//Initialization
   var enemies = [];
   for( var i = 0; i < 15 ; i++ ){
     enemies.push(new enemyCreator());
@@ -106,10 +95,10 @@ var moveEnemies = function(){
   board.selectAll(".enemy").data(enemies)
         .transition().duration(1500)
         .attr("cx", function(d){
-          return Math.random() * 800;
+          return Math.random() * 950;
         })
         .attr("cy", function(d){
-          return Math.random() * 400;
+          return Math.random() * 450;
         })
 
 
