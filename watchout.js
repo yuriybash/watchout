@@ -9,8 +9,9 @@ var board = d3.selectAll("body").append("svg")
 //CREATE AN ENEMY CLASS
     //INITIALIZE POSITIONS TO RANDOM VARIABLES
 var enemyCreator = function(){
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
+    this.radius = 40;
+    this.x = Math.random() * ((width-this.radius) - this.radius) + this.radius;
+    this.y = Math.random() * (height-this.radius - this.radius) + this.radius;
     this.character = "enemy";
 }
 
@@ -19,8 +20,8 @@ var enemyCreator = function(){
     //INITIALIZE POSITIONS TO RANDOM VARIABLES
 var humanCreator = function(){
     this.radius = 40;
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
+    this.x = Math.random() * ((width-this.radius) - this.radius) + this.radius;
+    this.y = Math.random() * (height-this.radius - this.radius) + this.radius;
     this.character = "human";
 }
 
@@ -100,6 +101,16 @@ console.log(enemies);
 }
 
 initialize(5);
+setInterval(function(){
+  update()
+}, 1000)
+
+
+
+
+
+
+
 
 
 
@@ -107,6 +118,17 @@ initialize(5);
 //CREATE UPDATE FUNCTION (USES SETINTERVAL)
     //THIS WILL CALL MOVEENEMIES()
     //THIS WILL CALL COLLISIONDETECT
+
+var update = function(){
+
+  moveEnemies();
+
+
+}
+
+
+
+
 
 //WRITE COLLISIONDETECT FUNCTION
 
