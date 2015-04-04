@@ -57,11 +57,13 @@ var drag = d3.behavior.drag()
     //CREATE ONE HUMAN
     //ADD HUMAN TO BOARD
         //ATTACH DRAG BEHAVIOR TO HUMAN
-function initialize(n){
+
+
+
 
 
   var enemies = [];
-  for( var i = 0; i < n ; i++ ){
+  for( var i = 0; i < 15 ; i++ ){
     enemies.push(new enemyCreator());
   }
 
@@ -94,19 +96,25 @@ function initialize(n){
 
 
 
-
-
-console.log(enemies);
-
-}
-
-initialize(5);
 setInterval(function(){
   update()
 }, 1000)
 
 
+var moveEnemies = function(){
 
+  board.selectAll(".enemy").data(enemies)
+        .transition().duration(1500)
+        .attr("cx", function(d){
+          return Math.random() * 800;
+        })
+        .attr("cy", function(d){
+          return Math.random() * 400;
+        })
+
+
+
+}
 
 
 
@@ -122,6 +130,7 @@ setInterval(function(){
 var update = function(){
 
   moveEnemies();
+  detectCollisions();
 
 
 }
@@ -132,7 +141,9 @@ var update = function(){
 
 //WRITE COLLISIONDETECT FUNCTION
 
+var detectCollisions = function(){
 
+}
 
 
 
