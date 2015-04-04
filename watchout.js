@@ -19,7 +19,7 @@ var enemyCreator = function(){
 //CREATE A HUMAN CLASS
     //INITIALIZE POSITIONS TO RANDOM VARIABLES
 var humanCreator = function(){
-    this.radius = 30;
+    this.radius = 15;
     this.x = Math.random() * ((width-this.radius) - this.radius) + this.radius;
     this.y = Math.random() * (height-this.radius - this.radius) + this.radius;
     this.character = "human";
@@ -31,8 +31,13 @@ var humanCreator = function(){
 var drag = d3.behavior.drag()
           .on('dragstart', function(){})
           .on('drag', function(){
+            if(d3.event.x < width - d3.select(this).attr("r")){
             d3.select(this).attr('cx', d3.event.x)
+            if(d3.event.y < height - d3.select(this).attr("r")){
             d3.select(this).attr('cy', d3.event.y)
+
+            }
+            }
           })
           .on('dragend', function(){})
 
@@ -51,8 +56,11 @@ var drag = d3.behavior.drag()
 
 
 //Initialization
+  var score = 0;
+  var highscore = 0;
+  var collisions = 0;
   var enemies = [];
-  for( var i = 0; i < 15 ; i++ ){
+  for( var i = 0; i < 25 ; i++ ){
     enemies.push(new enemyCreator());
   }
 
@@ -84,16 +92,19 @@ var drag = d3.behavior.drag()
        .call(drag)
 
 
+d3.select(".current").select("span").text(score)
+
+
 
 setInterval(function(){
   update()
-}, 1000)
+}, 1200)
 
 
 var moveEnemies = function(){
 
   board.selectAll(".enemy").data(enemies)
-        .transition().duration(1500)
+        .transition().duration(1200)
         .attr("cx", function(d){
           return Math.random() * 950;
         })
@@ -114,7 +125,11 @@ var moveEnemies = function(){
             var distanceBetween = Math.sqrt(Math.pow((xPosition - humanXPosition), 2) + Math.pow((yPosition - humanYPosition), 2))
 
             if(distanceBetween < (parseInt(enemyRadius) + parseInt(humanRadius))){
-                console.log("collision detected")
+                if(score > highscore){
+                  highscore = score;
+                }
+                collisions++;
+                score = 0;
             }
 
 
@@ -145,96 +160,15 @@ var moveEnemies = function(){
 var update = function(){
 
   moveEnemies();
-  detectCollisions();
-
-
-}
-
-
-
-
-
-//WRITE COLLISIONDETECT FUNCTION
-
-var detectCollisions = function(){
+  score = score + 50;
+  d3.select(".current").select("span")
+                .transition().duration(5)
+                .text(score)
+  d3.select(".high").select("span")
+                .transition().duration(50)
+                .text(highscore)
+  d3.select(".collisions").select("span")
+                .transition().duration(50)
+                .text(collisions)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var circleContainer = board.append("svg")
-//     .attr("height", 100)
-//     .attr("width", 100)
-
-
-// circleContainer.append("circle")
-//       .attr("cx", 50)
-//       .attr("cy", 50)
-//       .attr("r", 20)
-//       .attr("stroke", "black")
-//       .attr("stroke-width", 3)
-//       .attr("fill", "red")
-
-
-
-
-
-
-
-
-
-
-
-
-// var update = function(){
-
-
-// }
-
-
-
-
-
-
-
