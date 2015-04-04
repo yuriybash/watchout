@@ -100,6 +100,32 @@ var moveEnemies = function(){
         .attr("cy", function(d){
           return Math.random() * 450;
         })
+        .tween("FAYE", function(){
+
+            var thisEnemy = d3.select(this);
+            var xPosition = thisEnemy.attr("cx");
+            var yPosition = thisEnemy.attr("cy");
+            var enemyRadius = thisEnemy.attr("r");
+
+            var humanXPosition = d3.select(".human").attr("cx");
+            var humanYPosition = d3.select(".human").attr("cy");
+            var humanRadius = d3.select(".human").attr("r");
+
+            var distanceBetween = Math.sqrt(Math.pow((xPosition - humanXPosition), 2) + Math.pow((yPosition - humanYPosition), 2))
+
+            if(distanceBetween < (parseInt(enemyRadius) + parseInt(humanRadius))){
+                console.log("collision detected")
+            }
+
+
+
+
+
+
+
+
+
+        })
 
 
 
