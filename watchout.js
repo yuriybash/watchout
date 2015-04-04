@@ -9,7 +9,7 @@ var board = d3.selectAll("body").append("svg")
 //CREATE AN ENEMY CLASS
     //INITIALIZE POSITIONS TO RANDOM VARIABLES
 var enemyCreator = function(){
-    this.radius = 40;
+    this.radius = 30;
     this.x = Math.random() * ((width-this.radius) - this.radius) + this.radius;
     this.y = Math.random() * (height-this.radius - this.radius) + this.radius;
     this.character = "enemy";
@@ -19,7 +19,7 @@ var enemyCreator = function(){
 //CREATE A HUMAN CLASS
     //INITIALIZE POSITIONS TO RANDOM VARIABLES
 var humanCreator = function(){
-    this.radius = 40;
+    this.radius = 30;
     this.x = Math.random() * ((width-this.radius) - this.radius) + this.radius;
     this.y = Math.random() * (height-this.radius - this.radius) + this.radius;
     this.character = "human";
@@ -77,7 +77,7 @@ var drag = d3.behavior.drag()
        .attr("class", "enemy")
        .attr("cx", function(d){return d.x})
        .attr("cy", function(d){return d.y})
-       .attr("r", 40)
+       .attr("r", function(d){return d.radius})
        .attr("stroke", "black")
        .attr("stroke-width", 3)
        .attr("fill", "red")
@@ -88,7 +88,7 @@ var drag = d3.behavior.drag()
        .attr("class", "human")
        .attr("cx", function(d){return d.x})
        .attr("cy", function(d){return d.y})
-       .attr("r", 40)
+       .attr("r", function(d){return d.radius})
        .attr("stroke", "black")
        .attr("stroke-width", 3)
        .attr("fill", "green")
